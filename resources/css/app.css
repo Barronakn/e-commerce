@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.body {
+    max-width: 1700px !important;
+    margin: 0 auto;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: rgb(16, 16, 17);
+    border-radius: 15px;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Acceuil */
+
+.acceuil {
+    background-image: url("/public/images/home-bg.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 635px;
+}
+
+/* Home */
+
+.home {
+    background-image: url("/public/images/home-2.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 537px;
+}
