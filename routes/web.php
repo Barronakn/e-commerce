@@ -39,7 +39,7 @@ Route::get('/reset-password/{token}', [ResetPasswordController::class, "index"])
 Route::post('/reset-password', [ResetPasswordController::class, "reset"])->name('password_update');
 
 
-Route::middleware('auth', 'role:user')->group(function () {
+Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/accueil', [HomeController::class, "userHome"])->name('accueil');
     Route::get('/shops', [ProductController::class, "indexUser"])->name('shops');
     Route::get('/shop/{id}', [ProductController::class, 'showUser'])->name('shop');

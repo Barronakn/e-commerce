@@ -3,7 +3,7 @@ import React from 'react';
 const Nav = () => {
     return (
         <div>
-            <nav className="bg-gray-800">
+            <nav className="bg-gray-700">
                 <div className="container mx-auto">
                     <ul className="flex items-center justify-between py-4">
                         <li>

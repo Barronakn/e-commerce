@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.body {
+body {
+    margin: 0;
     max-width: 1700px !important;
-    margin: 0 auto;
 }
 
 body::-webkit-scrollbar {
     width: 10px;
+    background-color: rgb(179, 179, 179);
 }
 
 body::-webkit-scrollbar-thumb {
     width: 10px;
-    background-color: rgb(16, 16, 17);
+    background-color: rgb(242, 242, 242);
     border-radius: 15px;
+}
+
+.content {
+    margin: 0 auto;
+    max-width: 1700px !important;
 }
 
 li {
