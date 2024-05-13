@@ -1,50 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-    margin: 0;
-    max-width: 1700px !important;
+::selection {
+    background: #000;
+    color: #0000ff;
+    color: #fff;
 }
 
-body::-webkit-scrollbar {
-    width: 10px;
-    background-color: rgb(179, 179, 179);
+::-moz-selection {
+    background: #000;
+    color: #fff;
 }
 
-body::-webkit-scrollbar-thumb {
+::-webkit-scrollbar {
     width: 10px;
-    background-color: rgb(242, 242, 242);
+}
+
+::-webkit-scrollbar-thumb {
     border-radius: 15px;
+    background: #000;
+    width: 10px;
+    height: 50px;
 }
 
-.content {
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    font-display: fallback;
+}
+
+.bannerier{
+    background: url('../../public/assets/banner.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+body {
+    background-color: #e9e8e8;
+}
+
+.font-poppins {
+    font-family: " Poppins", sans-serif;
+}
+
+.container {
     margin: 0 auto;
     max-width: 1700px !important;
 }
 
-li {
-    list-style: none;
-}
+@layer components {
+    .top-76 {
+        top: 300px;
+    }
 
-a {
-    text-decoration: none;
-}
+    .h-30 {
+        height: 100px;
+    }
 
-/* Acceuil */
+    .details a {
+        @apply text-blue-500 hover:underline;
+    }
 
-.acceuil {
-    background-image: url("/public/images/home-bg.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 635px;
-}
-
-/* Home */
-
-.home {
-    background-image: url("/public/images/home-2.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 537px;
+    .avis input, .avis textarea {
+        @apply border-none shadow-md shadow-gray-500
+    }
 }

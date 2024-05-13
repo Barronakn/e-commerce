@@ -1,21 +1,22 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\Admin\SettingsController;
-use App\Http\Controllers\Admin\StatisticsController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\AideController;
 use App\Http\Controllers\Auth\LoginAdminController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\Users\CarteController;
+use App\Http\Controllers\AvisController;
+use App\Http\Controllers\DesignController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Users\CompteController;
-use App\Http\Controllers\Users\ContactController;
-use App\Http\Controllers\Users\PaiementController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SurMesureController;
+use App\Http\Controllers\TestimonialsController;
+use App\Http\Controllers\ModelesController;
+use App\Http\Controllers\ModerneController;
+use App\Http\Controllers\SansPhotoController;
+use App\Http\Controllers\Users\CartController;
 use App\Http\Controllers\Users\ProductController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -26,33 +27,24 @@ use App\Http\Controllers\Users\ProductController;
 |
 */
 
-Route::get('/', [HomeController::class, "index"])->name('home');
-Route::get('/register', [RegisterController::class, "index"])->name('register_users');
-Route::post('/register', [RegisterController::class, "register"]);
-Route::get('/login', [LoginController::class, "index"])->name('login_users');
-Route::post('/login', [LoginController::class, "login"]);
-Route::match(['get', 'post'], '/logout', [LoginController::class, 'logout']);
-Route::get('/forgot', [ForgotPasswordController::class, "forgot"])->name('forgot');
-Route::get('/forgot-password', [ForgotPasswordController::class, "index"])->name('password_request');
-Route::post('/forgot-password', [ForgotPasswordController::class, "sendResetLinkEmail"])->name('password_email');
-Route::get('/reset-password/{token}', [ResetPasswordController::class, "index"])->name('password_reset');
-Route::post('/reset-password', [ResetPasswordController::class, "reset"])->name('password_update');
 
+Route::get('/', [HomeController::class, "index"])->name('accueil');
+Route::get('/detailscv/{id}', [ProductController::class, 'showCv'])->name('details');
+Route::post('/avis', [AvisController::class, 'store']);
+Route::get('/avis', [AvisController::class, 'index'])->name("avis");
+Route::get('/avisettemoignages', [TestimonialsController::class, 'index']);
+Route::get('/cvsurmesure', [SurMesureController::class, 'index']);
+Route::get('/aide', [AideController::class, 'index']);
+Route::get('/cvmodernes', [ModerneController::class, "index"]);
+Route::get('/cvdesign', [DesignController::class, "index"]);
+Route::get('/cvsansphoto', [SansPhotoController::class, "index"]);
+Route::get('/cv_professionnel-cv_word-cv_powerPoint-cv_junior-cv_simples-cv_senior-cv_ modernes-cv-sur_deux_pages', [ModelesController::class, "index"])->name('modeles');
 
-Route::middleware(['auth', 'role:user'])->group(function () {
-    Route::get('/accueil', [HomeController::class, "userHome"])->name('accueil');
-    Route::get('/shops', [ProductController::class, "indexUser"])->name('shops');
-    Route::get('/shop/{id}', [ProductController::class, 'showUser'])->name('shop');
-    Route::get('/cart', [CarteController::class, 'index'])->name('cart');
-    Route::post('/cart/add/{id}', [CarteController::class, 'add'])->name('cart.add');
-    Route::get('/cart/decrease-quantity/{cartItemId}', [CarteController::class, 'decreaseQuantity'])->name('cart.decreaseQuantity');
-    Route::delete('/cart/remove/{cartItemId}', [CarteController::class, 'remove'])->name('cart.remove');
-    Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-    Route::post('/contact', [ContactController::class, 'submit']);
-    Route::get('/compte', [CompteController::class, 'index'])->name('compte');
-    Route::get('/formulaire/paiement', [PaiementController::class, 'index'])->name('formulaire-paiement');
-    Route::post('/payment/process', [PaiementController::class, 'processPayment'])->name("payment.process");
-});
+Route::get('/cart', [CartController::class, 'index'])->name('cart');
+Route::get('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/cart/decrease-quantity/{cartItemId}', [CartController::class, 'decreaseQuantity'])->name('cart.decreaseQuantity');
+Route::delete('/cart/remove/{cartItemId}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/send-mails', [MailController::class, 'sendmails'])->name('sendmails');
 
 /*
 |--------------------------------------------------------------------------
@@ -63,29 +55,24 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 |
 */
 //dashboard routes
-Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'products', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'cv', 'as' => 'admin.'], function () {
 
-    Route::get('/', [ProductController::class, "index"])->name('home');
+    Route::get('/', [DashboardController::class, "index"])->name('home');
 
-    Route::get('/admin/create', [ProductController::class, 'create']);
+    Route::get('/admin/create', [DashboardController::class, 'create'])->name("create");
 
-    Route::post('/admin/create', [ProductController::class, 'store'])->name("create");
+    Route::post('/admin/create', [DashboardController::class, 'store'])->name("create");
 
-    Route::get('/admin/show/{id}', [ProductController::class, 'show']);
+    Route::get('/admin/show/{id}', [DashboardController::class, 'show']);
 
-    Route::get('/admin/edit/{id}', [ProductController::class, 'edit']);
+    Route::get('/admin/edit/{id}', [DashboardController::class, 'edit']);
 
-    Route::put('/admin/edit/{id}', [ProductController::class, 'update'])->name("produit.update");
+    Route::put('/admin/edit/{id}', [DashboardController::class, 'update'])->name("cv.update");
 
-    Route::delete('/admin/delete/{id}', [ProductController::class, 'destroy']);
+    Route::delete('/admin/delete/{id}', [DashboardController::class, 'destroy']);
 
     Route::post('/admin/logout', [LoginAdminController::class, 'destroy'])->name('logout');
-});
 
-
-Route::middleware("auth")->group(function () {
-    Route::get("/admin/settings", [SettingsController::class, "index"]);
-    Route::get("/admin/statistics", [StatisticsController::class, "index"]);
 });
 
 

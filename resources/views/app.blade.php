@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title inertia>{{ config('app.name', 'Caasineuve Actions') }}</title>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
 
     <!-- Scripts -->
     @routes
@@ -18,6 +17,9 @@
 
 <body class="content font-sans antialiased">
     @inertia
+
+    <!-- Fedapay -->
+    <script src="https://cdn.fedapay.com/checkout.js?v=1.1.7"></script>
 </body>
 
 </html>

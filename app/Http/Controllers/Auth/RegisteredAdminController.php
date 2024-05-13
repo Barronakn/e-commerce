@@ -30,20 +30,16 @@ class RegisteredAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['Required', 'string', 'max:255'],
-            'email' => ['Required', 'string', 'email', 'max:255', 'unique:users'],
+            'admin_email' => ['Required', 'string', 'email', 'max:255', 'unique:users'],
             'role' => ['Required'],
             'password' => ['Required', 'confirmed'],
         ]);
 
         $user = Users::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'admin_email' => $request->admin_email,
             'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
-
-        // event(new Registered($user));
 
         auth()->login($user);
 

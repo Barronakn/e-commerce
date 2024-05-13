@@ -2,18 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\CartItem;
+use App\Models\Cv;
+use App\Models\Variant;
 use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        return Inertia::render('Home');
-    }
+    public function index() {
+        $cvs = Cv::all();
+        $variants = Variant::all();
+        $items = CartItem::all();
 
-    public function userHome()
-    {
-        return Inertia::render("Users/Home");
-    }
+        $products = [];
+        foreach ($cvs as $key => $cvItem) {
+            $products[$key] = array_merge(
+                $cvItem->toArray(), // Extrait attributes du model CV
+                [
+                    'variants' => isset($variants[$key]) ? $variants[$key]->toArray() : [], // Ajout de l'array variant s'il existe
+                ]
+            );
+        }
+
+        return Inertia::render("Home",[
+                'products' => $products,
+                'items' => $items
+            ]);
+        }
 }

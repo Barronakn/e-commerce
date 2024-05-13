@@ -1,4 +1,5 @@
 import './bootstrap';
+import "alpinejs";
 import '../css/app.css';
 
 import { createRoot } from 'react-dom/client';

@@ -28,7 +28,7 @@ const Register = () => {
                 Inertia.visit("/accueil"); // Rediriger vers la page spécifiée par le backend
             }
         } catch (error) {
-            return 'Une erreur s\'est produite :'. error;
+            return 'Une erreur s\'est produite :'.error;
         }
     };
 

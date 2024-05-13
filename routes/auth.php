@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisteredAdminController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
+
+// Route : Admin connexion
 Route::get('/admin/register', [RegisteredAdminController::class, 'create'])
     ->name('register');
 

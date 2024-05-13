@@ -26,11 +26,11 @@ class LoginAdminController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'admin_email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
+        if (Auth::attempt(['admin_email' => $request->input('admin_email'), 'password' => $request->input('password')])) {
 
             return redirect()->route("admin.home");
         } else {
