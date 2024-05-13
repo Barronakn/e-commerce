@@ -5,15 +5,13 @@ import panier from "../../../public/assets/cart.svg";
 import MenuResponsiv from "./MenuResponsiv";
 
 const Menu = ({items}) => {
-
-
     const compteur = items.length > 0 ? items.length : 0;
 
     const { url } = usePage();
 
     const nav = [
         {
-            linkName: "Modèles de CV",
+            linkName: "Modèles de Cv",
             link: "/",
         },
         {
